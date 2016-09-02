@@ -51,12 +51,18 @@ class SecondViewController: UIViewController {
 						self.delay(3.0, complete: {
 							self.yaaaLabel.text = "哦哦哦哦哦圖片好了!!!!!"
 							self.imageView.image = UIImage(data: data)
+							self.delay(3.0, complete: { 
+								self.dismissViewControllerAnimated(true, completion: nil)
+							})
 						})
 					})
 				} else {
 					// error
 					dispatch_async(dispatch_get_main_queue(), {
 						self.yaaaLabel.text = "圖片壞惹"
+						self.delay(3.0, complete: {
+							self.dismissViewControllerAnimated(true, completion: nil)
+						})
 					})
 				}
 			}
