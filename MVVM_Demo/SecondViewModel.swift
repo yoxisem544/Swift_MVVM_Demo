@@ -20,9 +20,8 @@ public protocol SecondViewModelDelegate: class {
 final public class SecondViewModel {
 	
 	public weak var delegate: SecondViewModelDelegate?
-	private var data: FakeData?
 	
-	public init(delegate: SecondViewModelDelegate?, fakeData: FakeData?) {
+	public init(delegate: SecondViewModelDelegate?) {
 		self.delegate = delegate
 	}
 	
@@ -33,7 +32,7 @@ final public class SecondViewModel {
 		})
 	}
 	
-	public func loadImage() {
+	public func loadImage(data: FakeData?) {
 		let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
 		let queue = dispatch_get_global_queue(qos, 0)
 		print(data)
