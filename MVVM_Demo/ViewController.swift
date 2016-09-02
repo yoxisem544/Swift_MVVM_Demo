@@ -16,50 +16,30 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var tableView: UITableView!
-	var data: [FakeData] = []
-	var filteredData: [FakeData] = []
-	var thisData: FakeData!
+	
+	var viewModel: ViewModel!
+	
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		viewModel = ViewModel(delegate: self)
+		
 		tableView.delegate = self
 		tableView.dataSource = self
-		
-		let titles: [String] = ["pika", "皮卡秋", "妙蛙種子", "妙蛙花", "火恐龍", "綠毛蟲", "比雕", "皮皮"]
-		let subtitles: [String] = ["神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝"]
-		let url: String = "https://d17ixjpazu3j94.cloudfront.net/images/2016/08/02/14701500280947wfNjfJhprI.jpg"
-		for _ in 1...100 {
-			for i in 0..<titles.count {
-				let d = FakeData(title: titles[i], subtitle: subtitles[i], url: url)
-				data.append(d)
-			}
-		}
 		
 		textField.addTarget(self, action: .textChanged, forControlEvents: .EditingChanged)
 	}
 
 	@objc private func textFieldTextChanged(textField: UITextField) {
 		guard let text = textField.text else { return }
-		let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
-		let queue = dispatch_get_global_queue(qos, 0)
-		filteredData.removeAll()
-		dispatch_async(queue) { 
-			for d in self.data {
-				if d.title?.rangeOfString(text) != nil {
-					self.filteredData.append(d)
-				}
-			}
-			dispatch_async(dispatch_get_main_queue(), { 
-				self.tableView.reloadData()
-			})
-		}
+		viewModel.filterData(with: text)
 	}
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "segue" {
 			let vc = segue.destinationViewController as? SecondViewController
-			vc?.data = thisData
+			vc?.data = viewModel.thisData
 		}
 	}
 
@@ -72,17 +52,25 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return filteredData.count
+		return viewModel.filteredData.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell
-		cell.fakeData = filteredData[indexPath.row]
+		cell.fakeData = viewModel.filteredData[indexPath.row]
 		return cell
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		thisData = filteredData[indexPath.row]
+		viewModel.thisData = viewModel.filteredData[indexPath.row]
 		performSegueWithIdentifier("segue", sender: nil)
 	}
+}
+
+extension ViewController : ViewModelDelegate {
+	
+	func viewModel(updateFiltered data: [FakeData]) {
+		tableView.reloadData()
+	}
+	
 }

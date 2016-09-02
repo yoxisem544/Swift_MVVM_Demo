@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct FakeData {
-	let title: String?
-	let subtitle: String?
-	let url: String?
+public struct FakeData {
+	public let title: String?
+	public let subtitle: String?
+	public let url: String?
 }
