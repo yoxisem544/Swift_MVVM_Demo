@@ -32,11 +32,11 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oXh-gp-dRH" id="dms-wd-LgA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="113.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdh-aC-9xr">
-                                                    <rect key="frame" x="8" y="8" width="49" height="35.5"/>
+                                                    <rect key="frame" x="8" y="8" width="49" height="36"/>
                                                     <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="25"/>
                                                     <color key="textColor" red="1" green="0.10008196498168598" blue="0.064635819304866171" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -93,11 +93,53 @@
                     <connections>
                         <outlet property="tableView" destination="3DD-gn-G7B" id="Jpb-mj-Tne"/>
                         <outlet property="textField" destination="N8S-Os-AWd" id="wjx-zx-HBu"/>
+                        <segue destination="ush-5d-9Fg" kind="presentation" identifier="segue" id="5Cs-cr-353"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="375" y="316"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="oLS-vd-5W6">
+            <objects>
+                <viewController id="ush-5d-9Fg" customClass="SecondViewController" customModule="MVVM_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="41W-ET-wc3"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Hj-QT-eBc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ezb-4n-3fh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vl6-7y-HnV">
+                                <rect key="frame" x="279" y="20" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyE-sU-vtJ">
+                                <rect key="frame" x="20" y="49" width="560" height="531"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Hj-QT-eBc" firstAttribute="top" secondItem="eyE-sU-vtJ" secondAttribute="bottom" constant="20" id="A0G-fc-V9u"/>
+                            <constraint firstItem="eyE-sU-vtJ" firstAttribute="trailing" secondItem="ezb-4n-3fh" secondAttribute="trailingMargin" id="BUC-7t-cng"/>
+                            <constraint firstItem="vl6-7y-HnV" firstAttribute="centerX" secondItem="ezb-4n-3fh" secondAttribute="centerX" id="L14-f9-fJl"/>
+                            <constraint firstItem="eyE-sU-vtJ" firstAttribute="leading" secondItem="ezb-4n-3fh" secondAttribute="leadingMargin" id="RdC-s1-Z5l"/>
+                            <constraint firstItem="eyE-sU-vtJ" firstAttribute="top" secondItem="vl6-7y-HnV" secondAttribute="bottom" constant="8" id="Vi5-Hf-D4U"/>
+                            <constraint firstItem="vl6-7y-HnV" firstAttribute="top" secondItem="41W-ET-wc3" secondAttribute="bottom" id="faw-qB-vAd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="eyE-sU-vtJ" id="mwq-Rf-WUO"/>
+                        <outlet property="yaaaLabel" destination="vl6-7y-HnV" id="Ywc-uc-sBL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="55i-IB-bVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1100" y="316"/>
         </scene>
     </scenes>
 </document>

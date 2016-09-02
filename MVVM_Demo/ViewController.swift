@@ -18,6 +18,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
 	var data: [FakeData] = []
 	var filteredData: [FakeData] = []
+	var thisData: FakeData!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
 		
 		let titles: [String] = ["pika", "皮卡秋", "妙蛙種子", "妙蛙花", "火恐龍", "綠毛蟲", "比雕", "皮皮"]
 		let subtitles: [String] = ["神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝", "神奇寶貝"]
-		let url: String = "http://163.13.175.7/102pro/102proa/102proa05/pake.jpg"
+		let url: String = "https://d17ixjpazu3j94.cloudfront.net/images/2016/08/02/14701500280947wfNjfJhprI.jpg"
 		for _ in 1...100 {
 			for i in 0..<titles.count {
 				let d = FakeData(title: titles[i], subtitle: subtitles[i], url: url)
@@ -55,6 +56,12 @@ class ViewController: UIViewController {
 		}
 	}
 
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "segue" {
+			let vc = segue.destinationViewController as? SecondViewController
+			vc?.data = thisData
+		}
+	}
 
 }
 
@@ -75,7 +82,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let d = filteredData[indexPath.row]
-		print(d)
+		thisData = filteredData[indexPath.row]
+		performSegueWithIdentifier("segue", sender: nil)
 	}
 }
